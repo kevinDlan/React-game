@@ -1,25 +1,47 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Vegeta from './components/Vegeta';
+import Goku from './components/Goku';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       vegeta:100,
+       goku:100
+    }
+  }
+
+  reducelife = (param,param1)=>{
+   if(param==="Goku")
+   {
+      this.setState((prevState)=>{
+        return {
+          vegeta:prevState.vegeta-param1
+        }
+      })
+   }else{
+      this.setState((prevState)=>{
+        return {
+          goku:prevState.goku-param1
+      }
+    })
+   }
+  }
+  
+  render(){
+    return (
+      <div className="container text-center">
+        <h1>Goku VS Vegeta</h1> 
+        <hr/>
+        <div className="row">
+            <Vegeta name="Vegeta"  vie={this.state.vegeta} reduceHandle={this.reducelife} />
+            <Goku name="Goku" vie={this.state.goku} reduceHandle={this.reducelife} />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
